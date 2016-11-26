@@ -26,7 +26,6 @@ public class Modelo {
 					}
 					if (migrafo.getArcos().get(j).getCabeza() == migrafo.getNodos().get(i)) {
 						balance.addTerm(-1, model.getVarByName("x(" + migrafo.getArcos().get(j).getCola() + "," + migrafo.getArcos().get(j).getCabeza() + ")"));
-						// FIXME llamado sospechoso getCola()
 					}
 				}
 				if (i != 0 && i != 6) {
