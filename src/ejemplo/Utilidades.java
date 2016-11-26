@@ -17,6 +17,8 @@ public class Utilidades {
 		int tail;
 		int head;
 		int cost;
+		int time;
+		double distance;
 		Arco cadaarco;
 		while ((linea = br.readLine()) != null) {
 			String[] list = linea.split(" ");
@@ -29,7 +31,9 @@ public class Utilidades {
 				tail = Integer.valueOf(list[0]);
 				head = Integer.valueOf(list[1]);
 				cost = Integer.valueOf(list[2]);
-				cadaarco = new Arco(tail, head, cost, 0, 0);
+				time = Integer.valueOf(list[3]);
+				distance = Double.valueOf(list[4]);
+				cadaarco = new Arco(tail, head, cost, time, distance);
 				grafo.agregarArco(cadaarco);
 			}
 		}

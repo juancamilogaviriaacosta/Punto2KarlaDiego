@@ -6,9 +6,9 @@ public class Arco {
 	private int cabeza;
 	private int costo;
 	private int tiempo;
-	private int distancia;
-
-	public Arco(int cola, int cabeza, int costo, int tiempo, int distancia) {
+	private double distancia;
+	
+	public Arco(int cola, int cabeza, int costo, int tiempo, double distancia) {
 		super();
 		this.cola = cola;
 		this.cabeza = cabeza;
@@ -41,10 +41,10 @@ public class Arco {
 	public void setTiempo(int tiempo) {
 		this.tiempo = tiempo;
 	}
-	public int getDistancia() {
+	public double getDistancia() {
 		return distancia;
 	}
-	public void setDistancia(int distancia) {
+	public void setDistancia(double distancia) {
 		this.distancia = distancia;
 	}
 }

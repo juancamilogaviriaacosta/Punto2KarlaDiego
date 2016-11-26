@@ -14,7 +14,7 @@ public class Modelo {
 			GRBModel model = new GRBModel(env);
 
 			for (int i = 0; i < migrafo.getArcos().size(); i++) {
-				model.addVar(0, 1, migrafo.getArcos().get(i).getCosto(), GRB.CONTINUOUS, "x(" + migrafo.getArcos().get(i).getCola() + "," + migrafo.getArcos().get(i).getCabeza() + ")");
+				model.addVar(0, 1, migrafo.getArcos().get(i).getTiempo(), GRB.CONTINUOUS, "x(" + migrafo.getArcos().get(i).getCola() + "," + migrafo.getArcos().get(i).getCabeza() + ")");
 			}
 			model.update();
 
