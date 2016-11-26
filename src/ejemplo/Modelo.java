@@ -36,6 +36,27 @@ public class Modelo {
 					model.addConstr(balance, GRB.EQUAL, -1, "Balance_" + i);
 				}
 			}
+			
+			GRBLinExpr costo= new GRBLinExpr();
+			for(int i=0;i<migrafo.getNodos().size();i++){
+				for(int j=0;j<migrafo.getArcos().size();j++){
+					if(migrafo.getArcos().get(j).getCabeza()==migrafo.getNodos().get(i)){
+					costo.addTerm(migrafo.getArcos().get(j).getCosto(),model.getVarByName("x("+migrafo.getArcos().get(j).getCola()+","+migrafo.getArcos().get(j).getCabeza()+")"));
+					}
+				}
+			}
+			model.addConstr(costo,GRB.LESS_EQUAL, 50, "Costo");
+			
+			GRBLinExpr distancia= new GRBLinExpr();
+			for(int i=0;i<migrafo.getNodos().size();i++){
+				for(int j=0;j<migrafo.getArcos().size();j++){
+					if(migrafo.getArcos().get(j).getCabeza()==migrafo.getNodos().get(i)){
+						distancia.addTerm(migrafo.getArcos().get(j).getDistancia(),model.getVarByName("x("+migrafo.getArcos().get(j).getCola()+","+migrafo.getArcos().get(j).getCabeza()+")"));
+					}
+				}
+			}
+			model.addConstr(distancia,GRB.LESS_EQUAL, 350, "Distancia");
+			
 			model.set(GRB.IntAttr.ModelSense, 1);
 			model.update();
 			model.write("EjemploRMC.lp");
