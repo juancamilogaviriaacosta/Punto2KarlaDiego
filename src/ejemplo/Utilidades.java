@@ -29,7 +29,7 @@ public class Utilidades {
 				tail = Integer.valueOf(list[0]);
 				head = Integer.valueOf(list[1]);
 				cost = Integer.valueOf(list[2]);
-				cadaarco = new Arco(tail, head, cost);
+				cadaarco = new Arco(tail, head, cost, 0, 0);
 				grafo.agregarArco(cadaarco);
 			}
 		}
