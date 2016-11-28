@@ -28,7 +28,7 @@ public class Modelo {
 						balance.addTerm(-1, model.getVarByName("x(" + migrafo.getArcos().get(j).getCola() + "," + migrafo.getArcos().get(j).getCabeza() + ")"));
 					}
 				}
-				if (i != 0 && i != 6) {
+				if (i != 0 && i != 14) {
 					model.addConstr(balance, GRB.EQUAL, 0, "Balance_" + i);
 				} else if (i == 0) {
 					model.addConstr(balance, GRB.EQUAL, 1, "Balance_" + i);
