@@ -14,7 +14,7 @@ public class Modelo {
 			GRBModel model = new GRBModel(env);
 
 			for (int i = 0; i < migrafo.getArcos().size(); i++) {
-				model.addVar(0, 1, migrafo.getArcos().get(i).getTiempo(), GRB.CONTINUOUS, "x(" + migrafo.getArcos().get(i).getCola() + "," + migrafo.getArcos().get(i).getCabeza() + ")");
+				model.addVar(0, 1, migrafo.getArcos().get(i).getTiempo(), GRB.BINARY, "x(" + migrafo.getArcos().get(i).getCola() + "," + migrafo.getArcos().get(i).getCabeza() + ")");
 			}
 			model.update();
 
@@ -59,7 +59,7 @@ public class Modelo {
 			
 			model.set(GRB.IntAttr.ModelSense, 1);
 			model.update();
-			model.write("EjemploRMC.lp");
+			model.write("Punto2Tarea4.lp");
 			model.optimize();
 		} catch (Exception e) {
 			e.printStackTrace();
