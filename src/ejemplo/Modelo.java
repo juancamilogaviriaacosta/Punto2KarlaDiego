@@ -4,6 +4,7 @@ import gurobi.GRB;
 import gurobi.GRBEnv;
 import gurobi.GRBLinExpr;
 import gurobi.GRBModel;
+import gurobi.GRBVar;
 
 public class Modelo {
 
@@ -61,6 +62,23 @@ public class Modelo {
 			model.update();
 			model.write("Punto2Tarea4.lp");
 			model.optimize();
+			
+			
+			String ruta = "";
+			String separador = " -> ";
+			GRBVar[] variables = model.getVars();
+			for (int i = 0; i < variables.length; i++) {
+				GRBVar variable = variables[i];
+                String nombre = variable.get(GRB.StringAttr.VarName);
+                Integer valor = ((Double)variable.get(GRB.DoubleAttr.X)).intValue();
+                if(valor.equals(1)) {
+                	ruta = ruta + nombre + separador;
+                }
+            }
+			ruta = ruta.substring(0, ruta.length() - separador.length());
+            System.out.println("\n*******************");
+            System.out.println("La ruta es: " + ruta);
+            System.out.println("*******************");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
