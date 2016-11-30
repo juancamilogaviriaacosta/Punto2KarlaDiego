@@ -75,10 +75,16 @@ public class Modelo {
                 	ruta = ruta + nombre + separador;
                 }
             }
-			ruta = ruta.substring(0, ruta.length() - separador.length());
-            System.out.println("\n*******************");
-            System.out.println("La ruta es: " + ruta);
-            System.out.println("*******************");
+			ruta = "** La ruta es: " + ruta.substring(0, ruta.length() - separador.length()) + " **";
+			
+			String margen = "";
+			for (int i = 0; i < ruta.length(); i++) {
+				margen = margen + "*";
+			}
+			System.out.println("\n");
+			System.out.println(margen);
+            System.out.println(ruta);
+            System.out.println(margen);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
