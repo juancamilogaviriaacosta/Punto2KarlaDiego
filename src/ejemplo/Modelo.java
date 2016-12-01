@@ -81,7 +81,7 @@ public class Modelo {
 			
 			String clave = "0";
 			List<String> respuesta = new ArrayList<>();
-			while(respuesta.size() < variables.length) {
+			while(respuesta.size() < mapa.size()) {
 				String valor = mapa.get(clave);
 				respuesta.add("x(" + clave + "," + valor + ")");
 				clave = valor;
