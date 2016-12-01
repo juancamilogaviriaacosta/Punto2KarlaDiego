@@ -1,5 +1,11 @@
 package ejemplo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import gurobi.GRB;
 import gurobi.GRBEnv;
 import gurobi.GRBLinExpr;
@@ -63,28 +69,35 @@ public class Modelo {
 			model.write("Punto2Tarea4.lp");
 			model.optimize();
 			
-			
-			String ruta = "";
-			String separador = " -> ";
+			Map<String, String> mapa = new HashMap<>();
 			GRBVar[] variables = model.getVars();
-			for (int i = 0; i < variables.length; i++) {
-				GRBVar variable = variables[i];
-                String nombre = variable.get(GRB.StringAttr.VarName);
+			for (GRBVar variable : variables) {
+				String nombre = variable.get(GRB.StringAttr.VarName);
                 Integer valor = ((Double)variable.get(GRB.DoubleAttr.X)).intValue();
                 if(valor.equals(1)) {
-                	ruta = ruta + nombre + separador;
+                	String[] split = nombre.replace("x", "").replace("(", "").replace(")", "").trim().split(",");
+    				mapa.put(split[0].trim(), split[1].trim());
                 }
-            }
-			ruta = "** La ruta es: " + ruta.substring(0, ruta.length() - separador.length()) + " **";
-			
-			String margen = "";
-			for (int i = 0; i < ruta.length(); i++) {
-				margen = margen + "*";
 			}
-			System.out.println("\n");
-			System.out.println(margen);
-            System.out.println(ruta);
-            System.out.println(margen);
+			
+			String clave = "0";
+			List<String> respuesta = new ArrayList<>();
+			while(respuesta.size() < variables.length) {
+				String valor = mapa.get(clave);
+				respuesta.add("x(" + clave + "," + valor + ")");
+				clave = valor;
+			}
+			
+			String imprimir = "";
+			for (String r : respuesta) {
+				if(respuesta.indexOf(r) != respuesta.size()-1) {
+					imprimir = imprimir + r + " -> ";
+				} else {
+					imprimir = imprimir + r;
+				}
+			}
+			System.out.println("\n\n-----------RUTA------------");
+			System.out.println(imprimir);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
